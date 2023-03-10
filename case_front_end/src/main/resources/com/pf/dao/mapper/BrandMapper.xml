@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pf.dao.mapper.BrandMapper">
+    <resultMap id="brandRs" type="com.pf.pojo.Brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+    <!-- 查询 -->
+    <select id="selectByTags" resultMap="brandRs">
+        SELECT * FROM tb_brand
+        <where>
+            <if test="brand.brandName != null &amp;&amp; brand.brandName != ''">
+                AND brand_name LIKE #{brand.brandName}
+            </if>
+            <if test="brand.companyName != null &amp;&amp; brand.companyName != ''">
+                AND company_name LIKE #{brand.companyName}
+            </if>
+            <if test="brand.status != null">
+                AND status = #{brand.status}
+            </if>
+        </where>
+        LIMIT #{begin}, #{size};
+    </select>
+    <!-- 查询数量 -->
+    <select id="selectTotalCountByTags" resultType="java.lang.Integer">
+        SELECT count(*) FROM tb_brand
+        <where>
+            <if test="brandName != null &amp;&amp; brandName != ''">
+                AND brand_name LIKE #{brandName}
+            </if>
+            <if test="companyName != null &amp;&amp; companyName != ''">
+                AND company_name LIKE #{companyName}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>;
+    </select>
+    <!-- 添加 -->
+    <insert id="insert">
+        INSERT INTO tb_brand (brand_name, company_name, ordered, address, status)
+        VALUES (#{brandName}, #{companyName}, #{ordered}, #{address}, #{status});
+    </insert>
+    <!-- 批量删除 -->
+    <delete id="delByIds">
+        DELETE FROM tb_brand WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>;
+    </delete>
+    <!-- 单个删除 -->
+    <delete id="delById">
+        DELETE FROM tb_brand WHERE id = #{id};
+    </delete>
+    <!-- 修改 -->
+    <update id="modifyById">
+        UPDATE tb_brand SET brand_name = #{brandName}, company_name = #{companyName}, ordered = #{ordered}, address = #{address}, status = #{status}
+        WHERE id = #{id};
+    </update>
+</mapper>
