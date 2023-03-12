@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pf.dao.mapper.CountryMapper">
+    <!-- 查询 -->
+    <select id="selectCountry" resultType="com.pf.pojo.Country">
+        SELECT * FROM tb_country;
+    </select>
+</mapper>

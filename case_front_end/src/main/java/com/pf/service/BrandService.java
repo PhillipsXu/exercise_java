@@ -3,8 +3,6 @@ package com.pf.service;
 import com.pf.pojo.Brand;
 import com.pf.pojo.PageBean;
 
-import java.util.ArrayList;
-
 public interface BrandService {
     void insert(Brand brand); // 新增
     void delByIds(int[] ids); // 批量删除

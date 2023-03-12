@@ -6,7 +6,7 @@
 
     <groupId>com.pf</groupId>
     <artifactId>case_front_end</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>case_front_end</name>
     <packaging>war</packaging>
 
